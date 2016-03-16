@@ -1,0 +1,3 @@
+first_page:
+    path:       /first/page
+    defaults:   { _controller: FirstSimpleBundle:Index:index }
