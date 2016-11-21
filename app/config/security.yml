@@ -2,8 +2,17 @@
 # http://symfony.com/doc/current/book/security.html
 security:
 
+    encoders:
+        UserBundle\Entity\User:
+            # bcrypt hashed passwords with a salt internally.
+            algorithm: bcrypt
+
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        bd_provider:
+            entity:
+                class: UserBundle:User
+                property: username
         in_memory:
             memory: ~
 
