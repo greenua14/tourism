@@ -17,13 +17,15 @@ class Version20160417161135 extends AbstractMigration
     {
         // New table `users`
         $table = $schema->createTable('users');
-        $table->addColumn('id', 'integer', ['limit' => 11, 'null' => false, 'auto_increment' => true]);
-        $table->addColumn('status', 'integer', ['limit' => 1, 'null' => false]);
-        $table->addColumn('user_name', 'string', ['limit' => 50, 'null' => false]);
-        $table->addColumn('password', 'string', ['limit' => 128, 'null' => false]);
-        $table->addColumn('email', 'string', ['limit' => 255, 'null' => false]);
-        $table->addColumn('created', 'datetime');
-        $table->addColumn('updated', 'datetime');
+        $table->addColumn('id', 'integer', ['notnull' => true, 'autoincrement' => true]);
+        $table->addColumn('status', 'smallint', ['notnull' => true]);
+        $table->addColumn('first_name', 'string', ['length' => 70, 'notnull' => true]);
+        $table->addColumn('last_name', 'string', ['length' => 70, 'notnull' => true]);
+        $table->addColumn('email', 'string', ['length' => 255, 'notnull' => true]);
+        $table->addColumn('password', 'string', ['length' => 64, 'notnull' => true]);
+        $table->addColumn('created', 'datetime', ['notnull' => false]);
+        $table->addColumn('updated', 'datetime', ['notnull' => false]);
+        $table->addColumn('deleted', 'datetime', ['notnull' => false]);
         $table->setPrimaryKey(['id']);
 
     }
@@ -33,6 +35,7 @@ class Version20160417161135 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
+
         $schema->dropTable('users');
 
     }
