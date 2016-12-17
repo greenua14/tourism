@@ -11,8 +11,8 @@ security:
     providers:
         bd_provider:
             entity:
-                class: UserBundle:User
-                property: username
+                class:      UserBundle:User
+                property:   email
         in_memory:
             memory: ~
 
@@ -29,5 +29,8 @@ security:
             # http_basic: ~
             # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            form_login:
+                login_path: login
+                check_path: login
+
+                csrf_token_generator: security.csrf.token_manager
