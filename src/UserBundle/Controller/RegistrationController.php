@@ -25,7 +25,7 @@ class RegistrationController extends Controller
             $em->persist($oUser);
             $em->flush();
 
-            return $this->redirectToRoute('user_registration');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render(
