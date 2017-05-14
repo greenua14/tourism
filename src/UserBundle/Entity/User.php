@@ -77,7 +77,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->status = true;
+        $this->status = 1;
     }
 
     public function serialize()

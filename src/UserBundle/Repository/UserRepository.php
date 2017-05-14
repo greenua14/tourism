@@ -4,7 +4,6 @@ namespace UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
@@ -20,7 +19,8 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
     public function loadUserByUsername($username)
     {
-        $this->createQueryBuilder('u')
+
+        return $this->createQueryBuilder('u')
             ->where('u.email = :email')
             ->setParameter('email', $username)
             ->getQuery()

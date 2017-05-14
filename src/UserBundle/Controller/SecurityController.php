@@ -9,28 +9,30 @@ use Symfony\Component\HttpFoundation\Response;
 class SecurityController extends Controller
 {
 
-    public function loginAction(Request $request)
+    public function loginAction()
     {
 
-        $session = $request->getScriptName();
-
         $authenticationUtils = $this->get('security.authentication_utils');
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('UserBundle:Security:login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
+            'last_username' => $authenticationUtils->getLastUsername(),
+            'error'         => $authenticationUtils->getLastAuthenticationError(),
         ]);
 
+    }
+
+    public function loginCheckAction()
+    {
+        // will never be executed
     }
 
     public function mainAction()
     {
 
-        return new Response('Main page');
+//        var_dump('GGGGGGGGGGGGGGGGGG');
+//        exit;
+//        return $this->render('UserBundle:Security:main.html.twig');
+        return new Response('<h1>Hello</h1>');
 
     }
 

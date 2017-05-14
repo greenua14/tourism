@@ -9,6 +9,9 @@ login:
     path:       /login
     defaults:   { _controller: UserBundle:Security:login }
 
+login_check:
+    path:       /login_check
+
 main:
-    path:       /test
+    path:       /main
     defaults:   { _controller: UserBundle:Security:main }

@@ -9,7 +9,7 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        bd_provider:
+        db_provider:
             entity:
                 class:      UserBundle:User
                 property:   email
@@ -23,14 +23,25 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            anonymous: true
+            pattern:    ^/
+            http_basic: ~
             # activate different ways to authenticate
 
             # http_basic: ~
             # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
+                provider: db_provider
+                always_use_default_target_path: true
+                target_path_parameter: redirect_url
+                default_target_path: main
                 login_path: login
-                check_path: login
+                check_path: login_check
 
                 csrf_token_generator: security.csrf.token_manager
+
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/main, roles: ROLE_USER }
